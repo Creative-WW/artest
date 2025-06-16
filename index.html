@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR Model Viewer</title>
+</head>
+<body>
+  <h1>View 3D Model in AR</h1>
+
+  <div id="ar-button">
+    <!-- AR button will appear here -->
+  </div>
+
+  <script>
+    const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    if (isiOS) {
+      // iOS AR Quick Look
+      document.getElementById("ar-button").innerHTML = `
+        <a rel="ar" href="AR_DQ8107.usdz">
+          <img src="preview.jpg" alt="View in AR" width="300" />
+        </a>
+        <p>Tap to view in AR (iOS only)</p>
+      `;
+    } else if (isAndroid) {
+      // Android Scene Viewer
+      document.getElementById("ar-button").innerHTML = `
+        <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://creative-ww.github.io/artest/AR_DQ2049.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://creative-ww.github.io/artest/;end;">
+          <img src="preview.jpg" alt="View in AR" width="300" />
+        </a>
+        <p>Tap to view in AR (Android only)</p>
+      `;
+    } else {
+      // Not supported (e.g., desktop)
+      document.getElementById("ar-button").innerHTML = `
+        <p>This AR experience is only available on iOS and Android mobile devices.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
